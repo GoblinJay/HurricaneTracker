@@ -1,5 +1,4 @@
 import streamlit as st
-import os
 
 st.set_page_config(
     page_title="Hurricane Tracker",
@@ -7,42 +6,47 @@ st.set_page_config(
     layout="wide"
 )
 
+# Initialize session state
+if 'model_loaded' not in st.session_state:
+    st.session_state.model_loaded = False
+
 # Show loading message
 with st.spinner('Loading required packages...'):
     try:
-        # Basic data handling
+        # Basic imports first
         import numpy as np
         import pandas as pd
-        
-        # Visualization
         import plotly.express as px
-        import plotly.graph_objects as go
         
-        # ML components
+        # Then try ML imports
         import torch
         from models.storm_predictor import StormPredictor, load_model
         
-        # Map components
+        # Finally visualization
         import folium
         from streamlit_folium import st_folium
-        
-        # Utilities
+        import plotly.graph_objects as go
         from datetime import datetime, timedelta
         import logging
         
+        st.session_state.model_loaded = True
+        
     except ImportError as e:
         st.error(f"""
-        ⚠️ Error loading required packages. Details:
-        ```
+        ⚠️ Error loading required packages:
+        ```python
         {str(e)}
         ```
-        Please contact the administrator.
+        Please check the installation and try again.
         """)
         st.stop()
 
-# Set up logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+# Set up logging with error handling
+try:
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger(__name__)
+except Exception as e:
+    st.warning(f"Logging setup failed: {str(e)}")
 
 # Load data
 @st.cache_data
