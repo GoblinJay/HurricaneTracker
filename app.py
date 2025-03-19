@@ -1,20 +1,44 @@
 import streamlit as st
+import os
 
-# Set up error handling for imports
-try:
-    import numpy as np
-    import pandas as pd
-    import plotly.express as px
-    import torch
-    from models.storm_predictor import StormPredictor, load_model
-    import folium
-    from streamlit_folium import st_folium
-    from datetime import datetime, timedelta
-    import plotly.graph_objects as go
-    import logging
-except ImportError as e:
-    st.error(f"Failed to import required packages: {str(e)}")
-    st.stop()
+st.set_page_config(
+    page_title="Hurricane Tracker",
+    page_icon="🌀",
+    layout="wide"
+)
+
+# Show loading message
+with st.spinner('Loading required packages...'):
+    try:
+        # Basic data handling
+        import numpy as np
+        import pandas as pd
+        
+        # Visualization
+        import plotly.express as px
+        import plotly.graph_objects as go
+        
+        # ML components
+        import torch
+        from models.storm_predictor import StormPredictor, load_model
+        
+        # Map components
+        import folium
+        from streamlit_folium import st_folium
+        
+        # Utilities
+        from datetime import datetime, timedelta
+        import logging
+        
+    except ImportError as e:
+        st.error(f"""
+        ⚠️ Error loading required packages. Details:
+        ```
+        {str(e)}
+        ```
+        Please contact the administrator.
+        """)
+        st.stop()
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -24,11 +48,15 @@ logger = logging.getLogger(__name__)
 @st.cache_data
 def load_data():
     try:
+        # First try loading from local file
         data_path = 'data/processed/hurricane_data.csv'
-        if not os.path.exists(data_path):
-            st.error(f"Data file not found: {data_path}")
-            return None
-        df = pd.read_csv(data_path)
+        if os.path.exists(data_path):
+            df = pd.read_csv(data_path)
+        else:
+            # Fallback to URL or generate data
+            st.warning("Local data not found, loading from backup source...")
+            # Add your fallback data loading logic here
+            
         df['date'] = pd.to_datetime(df['date'])
         return df
     except Exception as e:
