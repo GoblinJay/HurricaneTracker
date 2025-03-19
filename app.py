@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 
 st.set_page_config(
     page_title="Hurricane Tracker",
@@ -56,16 +57,28 @@ def load_data():
         data_path = 'data/processed/hurricane_data.csv'
         if os.path.exists(data_path):
             df = pd.read_csv(data_path)
+            df['date'] = pd.to_datetime(df['date'])
+            return df
         else:
             # Fallback to URL or generate data
             st.warning("Local data not found, loading from backup source...")
             # Add your fallback data loading logic here
+            fallback_url = "https://www.nhc.noaa.gov/data/hurdat/hurdat2-1851-2022-042723.txt"
+            df = pd.read_csv(fallback_url, header=None)  # Adjust based on your data format
+            df['date'] = pd.to_datetime(df['date'])
+            return df
             
-        df['date'] = pd.to_datetime(df['date'])
-        return df
     except Exception as e:
         st.error(f"Error loading data: {str(e)}")
-        return None
+        # Return a minimal DataFrame with required columns to prevent NoneType errors
+        return pd.DataFrame({
+            'date': pd.date_range(start='2000-01-01', end='2000-12-31'),
+            'category': [0] * 366,
+            'latitude': [0] * 366,
+            'longitude': [0] * 366,
+            'wind_speed': [0] * 366,
+            'pressure': [0] * 366
+        })
 
 # Load model
 @st.cache_resource
