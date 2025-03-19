@@ -10,6 +10,11 @@ scikit-learn>=1.3.0
 torch==2.2.0+cpu
 torchvision==0.17.0+cpu
 
+# Mapping and Visualization
+folium==0.15.0
+streamlit-folium==0.15.0
+matplotlib>=3.8.0
+
 # API and Web
 fastapi>=0.109.0
 uvicorn>=0.27.0
@@ -19,14 +24,9 @@ requests>=2.31.0
 
 # Data Processing
 python-dateutil>=2.8.2
-folium>=0.15.0
-streamlit-folium>=0.15.0
 
 # Development Tools
 setuptools>=69.0.0
-
-# Visualization
-matplotlib>=3.8.0
 
 # Remove heavy dependencies that might cause issues
 # xarray
