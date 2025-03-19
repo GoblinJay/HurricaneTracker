@@ -1,0 +1,10 @@
+2025-03-19 02:03:03,882 - INFO - Successfully downloaded HURDAT2 data to data/raw\hurdat2.txt
+2025-03-19 02:03:03,891 - ERROR - Error downloading HURDAT2 data: could not convert string to float: '28.0N'
+2025-03-19 02:03:34,079 - INFO - Successfully downloaded HURDAT2 data to data/raw\hurdat2.txt
+2025-03-19 02:03:34,895 - INFO - Saved processed hurricane data to data/processed\hurricane_data.csv
+2025-03-19 02:11:09,399 - INFO - Successfully downloaded HURDAT2 data to data/raw\hurdat2.txt
+2025-03-19 02:11:10,149 - INFO - Saved processed hurricane data to data/processed\hurricane_data.csv
+2025-03-19 02:45:48,213 - INFO - Successfully downloaded HURDAT2 data to data/raw\hurdat2.txt
+2025-03-19 02:45:49,060 - INFO - Saved processed hurricane data to data/processed\hurricane_data.csv
+2025-03-19 02:45:57,270 - INFO - Successfully downloaded HURDAT2 data to data/raw\hurdat2.txt
+2025-03-19 02:45:58,105 - INFO - Saved processed hurricane data to data/processed\hurricane_data.csv

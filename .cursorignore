@@ -1,0 +1,14 @@
+**/node_modules/**
+**/dist/**
+**/.git/**
+**/build/**
+**/.next/**
+**/.cache/**
+*.log
+*.lock
+.env*
+coverage/**
+**/venv/**
+**/.venv/**
+**/env/**
+**/.env/**
