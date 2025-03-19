@@ -1,19 +1,19 @@
-# Core Streamlit
+# Core packages with wheel distributions
 streamlit==1.32.0
-
-# Data processing
-numpy==1.24.3
-pandas==1.5.3
-
-# Visualization
-plotly==5.19.0
+numpy>=1.26.0
+pandas>=2.1.0
+plotly>=5.18.0
 
 # Machine Learning
-scikit-learn==1.2.2
+scikit-learn>=1.3.0
 
-# PyTorch (CPU only)
---find-links https://download.pytorch.org/whl/torch_stable.html
-torch==1.13.1+cpu
+# Deep Learning (CPU only)
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.2.0+cpu
+torchvision==0.17.0+cpu
+
+# Add setuptools explicitly
+setuptools>=69.0.0
 
 # API and Utils
 requests==2.31.0
