@@ -1,15 +1,20 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
-import plotly.express as px
-import torch
-from models.storm_predictor import StormPredictor, load_model
-import folium
-from streamlit_folium import st_folium
-from datetime import datetime, timedelta
-import plotly.graph_objects as go
-import logging
-import os
+
+# Set up error handling for imports
+try:
+    import numpy as np
+    import pandas as pd
+    import plotly.express as px
+    import torch
+    from models.storm_predictor import StormPredictor, load_model
+    import folium
+    from streamlit_folium import st_folium
+    from datetime import datetime, timedelta
+    import plotly.graph_objects as go
+    import logging
+except ImportError as e:
+    st.error(f"Failed to import required packages: {str(e)}")
+    st.stop()
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
