@@ -1,15 +1,19 @@
-# Core packages
+# Core Streamlit
 streamlit==1.32.0
+
+# Data processing
 numpy==1.24.3
 pandas==1.5.3
-scikit-learn==1.2.2
 
 # Visualization
 plotly==5.19.0
 
-# Deep Learning - CPU only version
---find-links https://download.pytorch.org/whl/cpu/torch_stable.html
-torch==2.0.1+cpu
+# Machine Learning
+scikit-learn==1.2.2
+
+# PyTorch (CPU only)
+--find-links https://download.pytorch.org/whl/torch_stable.html
+torch==1.13.1+cpu
 
 # API and Utils
 requests==2.31.0
