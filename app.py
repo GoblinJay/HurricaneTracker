@@ -9,6 +9,7 @@ from streamlit_folium import st_folium
 from datetime import datetime, timedelta
 import plotly.graph_objects as go
 import logging
+import os
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -17,19 +18,27 @@ logger = logging.getLogger(__name__)
 # Load data
 @st.cache_data
 def load_data():
-    df = pd.read_csv('data/processed/hurricane_data.csv')
-    df['date'] = pd.to_datetime(df['date'])
-    return df
+    try:
+        data_path = 'data/processed/hurricane_data.csv'
+        if not os.path.exists(data_path):
+            st.error(f"Data file not found: {data_path}")
+            return None
+        df = pd.read_csv(data_path)
+        df['date'] = pd.to_datetime(df['date'])
+        return df
+    except Exception as e:
+        st.error(f"Error loading data: {str(e)}")
+        return None
 
 # Load model
 @st.cache_resource
 def load_prediction_model():
     try:
-        model = load_model()  # Use the load_model function from storm_predictor.py
+        model = load_model()
         model.eval()
         return model
     except Exception as e:
-        st.warning(f"Could not load model: {str(e)}")
+        st.warning(f"Error loading model: {str(e)}")
         return None
 
 def plot_storm_track(storm_data, predictions=None):
