@@ -7,11 +7,11 @@
 coverage/**
 
 # Comment out or remove these lines to see dependencies
-# **/node_modules/**
+/node_modules/
 # **/dist/**
 # **/build/**
 # *.lock
-# **/venv/**
-# **/.venv/**
-# **/env/**
-# **/.env/**
+**/venv/**
+**/.venv/**
+**/env/**
+**/.env/**
